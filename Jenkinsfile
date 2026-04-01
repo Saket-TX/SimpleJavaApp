@@ -16,14 +16,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh '/usr/local/bin/docker build -t myapp .'
+                sh 'export PATH=$PATH:/usr/local/bin && /usr/local/bin/docker build -t myapp .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh '/usr/local/bin/docker rm -f myapp-container || true'
-                sh '/usr/local/bin/docker run -d --name myapp-container myapp'
+                sh 'export PATH=$PATH:/usr/local/bin && /usr/local/bin/docker rm -f myapp-container || true'
+                sh 'export PATH=$PATH:/usr/local/bin && /usr/local/bin/docker run -d --name myapp-container myapp'
             }
         }
     }
